@@ -1,0 +1,26 @@
+---
+abstract: 'Match incompletely specified bases in nucleic acid sequences'
+author:
+  - 'Leon Timmermans <leont@cpan.org>'
+build_requires:
+  File::Find: 0
+  File::Temp: 0
+  Test::More: 0.88
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300002, CPAN::Meta::Converter version 2.112150'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Bio-DNA-Incomplete
+requires:
+  Sub::Exporter: 0
+  perl: 5.006
+  strict: 0
+  warnings: 0
+resources:
+  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Bio-DNA-Incomplete
+  repository: git://github.com/Leont/bio-dna-incomplete.git
+version: 0.001
