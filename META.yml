@@ -5,6 +5,7 @@ author:
 build_requires:
   File::Find: 0
   File::Temp: 0
+  Test::Exception: 0
   Test::More: 0.88
 configure_requires:
   ExtUtils::MakeMaker: 6.30
@@ -16,6 +17,7 @@ meta-spec:
   version: 1.4
 name: Bio-DNA-Incomplete
 requires:
+  Carp: 0
   Sub::Exporter: 0
   perl: 5.006
   strict: 0
@@ -23,4 +25,4 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Bio-DNA-Incomplete
   repository: git://github.com/Leont/bio-dna-incomplete.git
-version: 0.001
+version: 0.002

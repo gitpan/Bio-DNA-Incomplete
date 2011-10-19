@@ -21,6 +21,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Carp" : 0,
             "Sub::Exporter" : 0,
             "perl" : "5.006",
             "strict" : 0,
@@ -31,6 +32,7 @@
          "requires" : {
             "File::Find" : 0,
             "File::Temp" : 0,
+            "Test::Exception" : 0,
             "Test::More" : "0.88"
          }
       }
@@ -47,6 +49,6 @@
          "web" : "http://github.com/Leont/bio-dna-incomplete"
       }
    },
-   "version" : "0.001"
+   "version" : "0.002"
 }
 
