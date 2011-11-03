@@ -1,6 +1,6 @@
 package Bio::DNA::Incomplete;
 {
-  $Bio::DNA::Incomplete::VERSION = '0.002';
+  $Bio::DNA::Incomplete::VERSION = '0.003';
 }
 use strict;
 use warnings;
@@ -45,8 +45,8 @@ sub pattern_to_regex {
 
 sub match_pattern {
 	my ($pattern, @args) = @_;
-    my $regex = pattern_to_regex($pattern);
-    return grep { $_ =~ /\A $regex \z/xms } @args;
+	my $regex = pattern_to_regex($pattern);
+	return grep { $_ =~ /\A $regex \z/xms } @args;
 }
 
 sub _all_possibilities {
@@ -54,7 +54,7 @@ sub _all_possibilities {
 	if (@rest) {
 		my @ret;
 		my $pretail = _all_possibilities(@rest);
-		for my $head (@{$bases_for{$current}}) {
+		for my $head (length $current == 1 ? @{ $bases_for{$current} } : $current) {
 			for my $tail (@{$pretail}) {
 				push @ret, $head.$tail;
 			}
@@ -62,13 +62,13 @@ sub _all_possibilities {
 		return \@ret;
 	}
 	else {
-		return $bases_for{$current};
+		return $bases_for{$current} || [ $current ];
 	}
 }
 
 sub all_possibilities {
-    my $pattern = uc shift;
-	my @bases = split //, $pattern;
+	my $pattern = uc shift;
+	my @bases = $pattern =~ m/[ACTG]+|[^ACGT]/g;
 	return @{ _all_possibilities(@bases) };
 }
 
@@ -86,7 +86,11 @@ Bio::DNA::Incomplete - Match incompletely specified bases in nucleic acid sequen
 
 =head1 VERSION
 
-version 0.002
+version 0.003
+
+=head1 DESCRIPTION
+
+Sometimes DNA patterns are given with incomplete nucleotides that match more than one real nucleotide. This module helps you deal with them.
 
 =head1 FUNCTIONS
 
@@ -109,6 +113,8 @@ Returns a list of all possible sequences that can match the pattern.
 =head1 SEE ALSO
 
 =over 1
+
+=item L<Nomenclature for Incompletely Specified Bases in Nucleic Acid Sequences|http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html>
 
 =item * Text::Glob
 
