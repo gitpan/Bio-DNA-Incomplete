@@ -1,12 +1,12 @@
 package Bio::DNA::Incomplete;
 {
-  $Bio::DNA::Incomplete::VERSION = '0.003';
+  $Bio::DNA::Incomplete::VERSION = '0.004';
 }
 use strict;
 use warnings;
 
 use Carp 'croak';
-use Sub::Exporter -setup => { exports => [qw/pattern_to_regex pattern_to_regex_string match_pattern all_possibilities/], groups => { default => [qw/pattern_to_regex pattern_to_regex_string match_pattern all_possibilities/]} };
+use Sub::Exporter::Progressive -setup => { exports => [qw/pattern_to_regex pattern_to_regex_string match_pattern all_possibilities/], groups => { default => [qw/pattern_to_regex pattern_to_regex_string match_pattern all_possibilities/]} };
 
 my %simple = map { ( $_ => $_ ) } qw/A C G T/;
 
@@ -54,6 +54,7 @@ sub _all_possibilities {
 	if (@rest) {
 		my @ret;
 		my $pretail = _all_possibilities(@rest);
+		# Chunks longer than 1 are always /[ACTG]+/, so always match themselves
 		for my $head (length $current == 1 ? @{ $bases_for{$current} } : $current) {
 			for my $tail (@{$pretail}) {
 				push @ret, $head.$tail;
@@ -76,7 +77,7 @@ sub all_possibilities {
 
 #ABSTRACT: Match incompletely specified bases in nucleic acid sequences
 
-
+__END__
 
 =pod
 
@@ -86,7 +87,7 @@ Bio::DNA::Incomplete - Match incompletely specified bases in nucleic acid sequen
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 DESCRIPTION
 
@@ -112,9 +113,9 @@ Returns a list of all possible sequences that can match the pattern.
 
 =head1 SEE ALSO
 
-=over 1
+=over 4
 
-=item L<Nomenclature for Incompletely Specified Bases in Nucleic Acid Sequences|http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html>
+=item * L<Nomenclature for Incompletely Specified Bases in Nucleic Acid Sequences|http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html>
 
 =item * Text::Glob
 
@@ -132,7 +133,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
